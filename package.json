@@ -1,0 +1,91 @@
+{
+  "name": "express-starter",
+  "version": "1.0.0",
+  "description": "Express API ES6 Starter",
+  "scripts": {
+    "start": "node dist",
+    "prestart": "npm run build",
+    "lint": "eslint src test",
+    "lint:fix": "eslint src test --fix",
+    "codecov": "cat coverage/*/lcov.info | codecov",
+    "knex": "babel-node node_modules/.bin/knex",
+    "prettier": "prettier --write **/*.{js,json,yml,md}",
+    "build": "rimraf dist && babel src --copy-files --out-dir dist --source-maps",
+    "start:dev": "nodemon --watch .env --watch src --exec babel-node src --source-maps",
+    "test": "cross-env NODE_ENV=test mocha --exit --recursive --require @babel/register test",
+    "test:coverage": "cross-env NODE_ENV=test nyc --require @babel/register --reporter lcov --reporter text mocha --exit --recursive test"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged && npm test"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{md,yml,yml,json}": [
+      "prettier --write"
+    ]
+  },
+  "keywords": [
+    "javascript",
+    "node",
+    "express",
+    "es6",
+    "api"
+  ],
+  "private": true,
+  "author": "Jovin Thariyath",
+  "license": "MIT",
+  "dependencies": {
+    "@hapi/boom": "^9.1.0",
+    "@hapi/joi": "^17.1.1",
+    "@sentry/node": "^5.21.1",
+    "body-parser": "^1.19.0",
+    "bookshelf": "^1.2.0",
+    "compression": "^1.7.4",
+    "jsonwebtoken": "^8.5.1",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "helmet": "^4.0.0",
+    "http-status-codes": "^1.4.0",
+    "knex": "^0.21.4",
+    "lodash": "^4.17.20",
+    "morgan": "^1.10.0",
+    "pg": "^8.3.0",
+    "serve-favicon": "^2.5.0",
+    "swagger-jsdoc": "^4.0.0",
+    "swagger-ui-dist": "^3.32.1",
+    "winston": "^3.3.3",
+    "winston-daily-rotate-file": "^4.5.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.11.1",
+    "@babel/node": "^7.10.5",
+    "@babel/preset-env": "^7.11.0",
+    "@babel/register": "^7.10.5",
+    "chai": "^4.2.0",
+    "codecov": "^3.7.2",
+    "cross-env": "^7.0.2",
+    "eslint": "^7.7.0",
+    "eslint-config-leapfrog": "^3.0.0",
+    "eslint-config-prettier": "^6.11.0",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.11",
+    "mocha": "^8.1.1",
+    "nodemon": "^2.0.4",
+    "nyc": "^15.1.0",
+    "prettier": "^2.0.5",
+    "rimraf": "^3.0.2",
+    "supertest": "^4.0.2"
+  },
+  "engines": {
+    "node": ">= 10.13.0",
+    "npm": ">= 6.4.1",
+    "yarn": ">= 1.20.0"
+  }
+}
